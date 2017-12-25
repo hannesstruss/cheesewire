@@ -1,0 +1,22 @@
+ext {
+  compileSdkVersion = 26
+  minSdkVersion = 16
+  targetSdkVersion = 26
+
+  // Kotlin
+  def kotlinVersion = '1.2.10'
+  kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
+  // Conductor
+  conductor = 'com.bluelinelabs:conductor:2.1.4'
+
+  // Support Lib
+  def supportLibVersion = '27.0.2'
+  appCompat = "com.android.support:appcompat-v7:$supportLibVersion"
+  supportAnnotations = "com.android.support:support-annotations:$supportLibVersion"
+
+  // Tests
+  junit = 'junit:junit:4.12'
+  supportTestRunner = 'com.android.support.test:runner:1.0.1'
+}

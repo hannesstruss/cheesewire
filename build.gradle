@@ -1,27 +1,33 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    // The Android Gradle Plugin doesn't support being included in submodules.
+    // See https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration.html#known_issues
+    classpath 'com.android.tools.build:gradle:3.0.1'
+  }
 }
 
-allprojects {
+subprojects {
+  buildscript {
     repositories {
-        google()
-        jcenter()
+      jcenter()
+      google()
     }
+  }
+
+  repositories {
+    jcenter()
+    google()
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
+
+apply from: rootProject.file('dependencies.gradle')

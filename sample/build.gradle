@@ -1,0 +1,38 @@
+buildscript {
+  dependencies {
+    classpath rootProject.ext.kotlinPlugin
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  defaultConfig {
+    applicationId "de.hannesstruss.cheesewire.sample"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+}
+
+dependencies {
+  def deps = rootProject.ext
+
+  implementation project(':cheesewire')
+  implementation project(':cheesewire-conductor')
+
+  implementation deps.kotlinStdLib
+  implementation deps.appCompat
+  implementation deps.conductor
+
+  testImplementation deps.junit
+  androidTestImplementation supportTestRunner
+}
