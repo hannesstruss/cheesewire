@@ -31,5 +31,7 @@ dependencies {
   implementation deps.supportAnnotations
 
   testImplementation deps.junit
+  androidTestImplementation deps.truth
   androidTestImplementation deps.supportTestRunner
+  androidTestImplementation deps.supportTestRules
 }

@@ -18,5 +18,7 @@ ext {
 
   // Tests
   junit = 'junit:junit:4.12'
+  truth = 'com.google.truth:truth:0.35'
   supportTestRunner = 'com.android.support.test:runner:1.0.1'
+  supportTestRules = 'com.android.support.test:rules:0.5'
 }
