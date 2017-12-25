@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -91,23 +90,33 @@ afterEvaluate { project ->
     sign configurations.archives
   }
 
-  task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-
-    if (JavaVersion.current().isJava8Compatible()) {
-      allprojects {
-        tasks.withType(Javadoc) {
-          options.addStringOption('Xdoclint:none', '-quiet')
-        }
-      }
-    }
+  project.dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
   }
 
-  task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+  task androidDokkaJar(type: Jar, dependsOn: project.dokka) {
     classifier = 'javadoc'
-    from androidJavadocs.destinationDir
+    from project.dokka.outputDirectory
   }
+
+//  task androidJavadocs(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//
+//    if (JavaVersion.current().isJava8Compatible()) {
+//      allprojects {
+//        tasks.withType(Javadoc) {
+//          options.addStringOption('Xdoclint:none', '-quiet')
+//        }
+//      }
+//    }
+//  }
+//
+//  task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//    classifier = 'javadoc'
+//    from androidJavadocs.destinationDir
+//  }
 
   task androidSourcesJar(type: Jar) {
     classifier = 'sources'
@@ -116,6 +125,6 @@ afterEvaluate { project ->
 
   artifacts {
     archives androidSourcesJar
-    archives androidJavadocsJar
+    archives androidDokkaJar
   }
 }

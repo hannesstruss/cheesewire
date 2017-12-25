@@ -1,11 +1,13 @@
 buildscript {
   dependencies {
     classpath rootProject.ext.kotlinPlugin
+    classpath rootProject.ext.dokka
   }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
