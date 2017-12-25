@@ -35,3 +35,5 @@ dependencies {
   androidTestImplementation deps.supportTestRunner
   androidTestImplementation deps.supportTestRules
 }
+
+apply from: '../mvn-push.gradle'
