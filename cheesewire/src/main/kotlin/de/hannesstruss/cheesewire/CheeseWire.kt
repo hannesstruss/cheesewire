@@ -10,6 +10,7 @@ typealias Initializer<T> = (KProperty<*>) -> T
 open class ViewBinder(private val findView: (id: Int) -> View?) {
   private val lazies = mutableSetOf<ResettableLazy<*>>()
 
+  /** Binds a single view   */
   @Suppress("UNCHECKED_CAST")
   fun <T : View> bind(@IdRes id: Int): ReadOnlyProperty<Any, T> {
     return this.lazy { prop ->
@@ -17,6 +18,7 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
     }
   }
 
+  /** Binds a single optional view */
   @Suppress("UNCHECKED_CAST")
   fun <T : View> bindOptional(@IdRes id: Int): ReadOnlyProperty<Any, T?> {
     return this.lazy {
@@ -24,6 +26,7 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
     }
   }
 
+  /** Binds a list of views, all of which are required to be present */
   @Suppress("UNCHECKED_CAST")
   fun <T : View> bindAll(vararg ids: Int): ReadOnlyProperty<Any, List<T>> {
     return this.lazy { prop ->
@@ -31,6 +34,10 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
     }
   }
 
+  /**
+   * Binds a list of views, of which some may be not present.
+   * Non-present views will be omitted from the list.
+   */
   @Suppress("UNCHECKED_CAST")
   fun <T : View> bindSome(vararg ids: Int): ReadOnlyProperty<Any, List<T>> {
     return this.lazy {
@@ -38,12 +45,16 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
     }
   }
 
+  /**
+   * Generic lazy property delegate that will be reset when [ViewBinder.reset] is called.
+   */
   fun <T> lazy(initializer: Initializer<T>): ReadOnlyProperty<Any, T> {
     val lazy = ResettableLazy(initializer)
     lazies.add(lazy)
     return lazy
   }
 
+  /** Resets the view bindings */
   fun reset() {
     lazies.forEach { it.reset() }
   }
