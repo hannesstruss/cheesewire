@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import de.hannesstruss.cheesewire.sample.R
 
 class MainActivity : AppCompatActivity() {
   private lateinit var router: Router
