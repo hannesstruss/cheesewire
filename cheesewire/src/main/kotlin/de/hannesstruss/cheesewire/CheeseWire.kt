@@ -7,10 +7,6 @@ import kotlin.reflect.KProperty
 
 typealias Initializer<T> = (KProperty<*>) -> T
 
-private fun viewNotFound(id: Int, prop: KProperty<*>): Nothing {
-  throw IllegalStateException("View with id '$id; for property '${prop.name}' not found")
-}
-
 open class ViewBinder(private val findView: (id: Int) -> View?) {
   private val lazies = mutableSetOf<ResettableLazy<*>>()
 
@@ -51,6 +47,10 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
   fun reset() {
     lazies.forEach { it.reset() }
   }
+}
+
+private fun viewNotFound(id: Int, prop: KProperty<*>): Nothing {
+  throw IllegalStateException("View with id '$id' for property '${prop.name}' not found")
 }
 
 private class ResettableLazy<out T>(
