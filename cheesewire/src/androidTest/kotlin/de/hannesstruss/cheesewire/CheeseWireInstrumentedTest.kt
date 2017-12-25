@@ -78,7 +78,11 @@ class CheeseWireInstrumentedTest {
 
   @Test fun findsOptionalList() {
     assertThat(someExistingChildren).hasSize(1)
-    assertThat(allExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+    assertThat(someExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+  }
+
+  @Test fun nonExistingViewIsNull() {
+    assertThat(nonExistingChild).isNull()
   }
 
   @Test fun resets() {
