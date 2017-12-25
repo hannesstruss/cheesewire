@@ -1,5 +1,6 @@
 package de.hannesstruss.cheesewire
 
+import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
@@ -43,15 +44,19 @@ class CheeseWireInstrumentedTest {
   }
 
   @Test fun lazilyFindsViews() {
-    child1.text = "Hello!"
-    child1.text = "Nice!"
+    main {
+      child1.text = "Hello!"
+      child1.text = "Nice!"
+    }
 
     assertThat(timesSearchedView.get()).isEqualTo(1)
   }
 
   @Test fun findsOptionalViews() {
-    assertThat(child2).isNotNull()
-    assertThat(child2?.id).isEqualTo(CheeseWireTestActivity.child2Id)
+    main {
+      assertThat(child2).isNotNull()
+      assertThat(child2?.id).isEqualTo(CheeseWireTestActivity.child2Id)
+    }
   }
 
   @Test fun throwsWhenRequiredViewDoesNotExist() {
@@ -63,33 +68,44 @@ class CheeseWireInstrumentedTest {
   }
 
   @Test fun findsList() {
-    assertThat(allExistingChildren).hasSize(2)
-    assertThat(allExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
-    assertThat(allExistingChildren[1].id).isEqualTo(CheeseWireTestActivity.child2Id)
+    main {
+      assertThat(allExistingChildren).hasSize(2)
+      assertThat(allExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+      assertThat(allExistingChildren[1].id).isEqualTo(CheeseWireTestActivity.child2Id)
+    }
   }
 
   @Test fun throwsWhenSomeRequiredViewsInListDontExist() {
     thrown.expect(IllegalStateException::class.java)
     thrown.expectMessage("View with id '${CheeseWireTestActivity.doesNotExistId}' " +
         "for property 'someMissingChildren' not found")
-
     assertThat(someMissingChildren.size).isEqualTo(1)
   }
 
   @Test fun findsOptionalList() {
-    assertThat(someExistingChildren).hasSize(1)
-    assertThat(someExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+    main {
+      assertThat(someExistingChildren).hasSize(1)
+      assertThat(someExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+    }
   }
 
   @Test fun nonExistingViewIsNull() {
-    assertThat(nonExistingChild).isNull()
+    main {
+      assertThat(nonExistingChild).isNull()
+    }
   }
 
   @Test fun resets() {
-    child1.text = "Hello!"
-    viewBinder.reset()
-    child1.text = "Nice!"
+    main {
+      child1.text = "Hello!"
+      viewBinder.reset()
+      child1.text = "Nice!"
+    }
 
     assertThat(timesSearchedView.get()).isEqualTo(2)
+  }
+
+  private fun main(block: () -> Unit) {
+    InstrumentationRegistry.getInstrumentation().runOnMainSync(block)
   }
 }
