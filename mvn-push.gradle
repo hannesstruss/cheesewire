@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -90,41 +91,18 @@ afterEvaluate { project ->
     sign configurations.archives
   }
 
-  project.dokka {
-    outputFormat = 'javadoc'
-    outputDirectory = "$buildDir/javadoc"
-  }
-
-  task androidDokkaJar(type: Jar, dependsOn: project.dokka) {
+  task androidJavadocsJar(type: Jar, dependsOn: project.tasks['dokkaJavadoc']) {
     classifier = 'javadoc'
-    from project.dokka.outputDirectory
+    from project.tasks['dokkaJavadoc'].outputDirectory
   }
-
-//  task androidJavadocs(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//
-//    if (JavaVersion.current().isJava8Compatible()) {
-//      allprojects {
-//        tasks.withType(Javadoc) {
-//          options.addStringOption('Xdoclint:none', '-quiet')
-//        }
-//      }
-//    }
-//  }
-//
-//  task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-//    classifier = 'javadoc'
-//    from androidJavadocs.destinationDir
-//  }
 
   task androidSourcesJar(type: Jar) {
     classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
+    from android.sourceSets.main.java.include(["**/*.kt"]).sourceFiles
   }
 
   artifacts {
     archives androidSourcesJar
-    archives androidDokkaJar
+    archives androidJavadocsJar
   }
 }

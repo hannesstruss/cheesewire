@@ -38,4 +38,9 @@ dependencies {
   androidTestImplementation deps.supportTestRules
 }
 
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+  outputFormat = "javadoc"
+  outputDirectory = "$buildDir/dokkaJavadoc"
+}
+
 apply from: '../mvn-push.gradle'

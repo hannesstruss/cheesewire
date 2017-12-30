@@ -1,3 +1,3 @@
 # Changelog
 
-This library hasn't been released yet! :sparkles: 
+## 0.2 Initial Release

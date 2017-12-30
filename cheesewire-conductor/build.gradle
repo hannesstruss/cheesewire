@@ -1,11 +1,13 @@
 buildscript {
   dependencies {
     classpath rootProject.ext.kotlinPlugin
+    classpath rootProject.ext.dokka
   }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -34,6 +36,11 @@ dependencies {
 
   testImplementation deps.junit
   androidTestImplementation deps.supportTestRunner
+}
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+  outputFormat = "javadoc"
+  outputDirectory = "$buildDir/dokkaJavadoc"
 }
 
 apply from: '../mvn-push.gradle'

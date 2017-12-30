@@ -7,10 +7,21 @@ import kotlin.reflect.KProperty
 
 typealias Initializer<T> = (KProperty<*>) -> T
 
+/**
+ * Provides property delegates that bind Android views. The views are resolved lazily
+ * by calling [findView], and cached until [reset] is called.
+ *
+ * Also provides a generic lazy property that is cached until [reset] is called. This can
+ * be used to cache things derived from the views, such as RxBinding Observables:
+ *
+ *     val views = ViewBinder { findViewById(it) }
+ *     val button by views.bind(R.id.button)
+ *     val buttonClicks by views.lazy { button.clicks() }
+ */
 open class ViewBinder(private val findView: (id: Int) -> View?) {
   private val lazies = mutableSetOf<ResettableLazy<*>>()
 
-  /** Binds a single view   */
+  /** Binds a single view */
   @Suppress("UNCHECKED_CAST")
   fun <T : View> bind(@IdRes id: Int): ReadOnlyProperty<Any, T> {
     return this.lazy { prop ->
@@ -58,30 +69,8 @@ open class ViewBinder(private val findView: (id: Int) -> View?) {
   fun reset() {
     lazies.forEach { it.reset() }
   }
-}
 
-private fun viewNotFound(id: Int, prop: KProperty<*>): Nothing {
-  throw IllegalStateException("View with id '$id' for property '${prop.name}' not found")
-}
-
-private class ResettableLazy<out T>(
-    private val initializer: Initializer<T>
-) : ReadOnlyProperty<Any, T> {
-
-  private object EMPTY
-
-  private var value: Any? = EMPTY
-
-  override fun getValue(thisRef: Any, property: KProperty<*>): T {
-    if (value == EMPTY) {
-      value = initializer(property)
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    return value as T
-  }
-
-  fun reset() {
-    value = EMPTY
+  private fun viewNotFound(id: Int, prop: KProperty<*>): Nothing {
+    throw IllegalStateException("View with id '$id' for property '${prop.name}' not found")
   }
 }

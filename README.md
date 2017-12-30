@@ -1,8 +1,9 @@
 # CheeseWire
 
 [![Build Status](https://travis-ci.org/hannesstruss/cheesewire.svg?branch=master)](https://travis-ci.org/hannesstruss/cheesewire)
+[![Maven Central](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/de/hannesstruss/cheesewire/cheesewire/maven-metadata.xml.svg)](http://search.maven.org/#search%7Cga%7C1%7Ccheesewire)
 
-Lifecycle-friendly view binding in Kotlin for Conductor and others.
+Lifecycle-friendly view binding in Kotlin for Conductor.
 
 ## Usage
 
@@ -32,13 +33,13 @@ during `onDestroyView`, the view binder is reset, and your views aren't leaked.
 
 See the [sample app](https://github.com/hannesstruss/cheesewire/tree/master/sample) for an example.
 
+
 ## Generic lazy
 
 CheeseWire view binders also provide a generic lazy property delegate which
-is synchronized with your view property lifecycle. This comes in handy in combination with
-[RxBinding](https://github.com/JakeWharton/RxBinding), e.g. when your controller
-exposes a single stream of view events to an MVI-like archiecture and you want to
-prevent calling the RxBinding methods twice on a view:
+is synchronized with your view property lifecycle. This comes in handy e.g. in
+combination with [RxBinding](https://github.com/JakeWharton/RxBinding) when you
+want to avoid calling the RxBinding methods twice on a view:
 
 ```kotlin
 class MyMviController : BaseController() {
@@ -53,7 +54,6 @@ class MyMviController : BaseController() {
   }
 }
 ```
-
 
 
 ## Attributions :bow:
