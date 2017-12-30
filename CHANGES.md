@@ -1,3 +1,5 @@
 # Changelog
 
-## 0.2 Initial Release
+## 0.2 (2017-12-30)
+
+Initial Release
