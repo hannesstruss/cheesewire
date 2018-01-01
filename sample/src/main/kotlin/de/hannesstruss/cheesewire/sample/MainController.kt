@@ -6,13 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.bluelinelabs.conductor.Controller
-import de.hannesstruss.cheesewire.conductor.ConductorViewBinder
 
 @SuppressLint("SetTextI18n")
-class MainController : Controller() {
-  private val views = ConductorViewBinder(this)
-
+class MainController : BaseController() {
   private val someLazy: String by views.lazy { "${Math.random()}" }
 
   private val text1: TextView by views.bind(R.id.text1)

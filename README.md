@@ -5,23 +5,15 @@
 
 Lifecycle-friendly view binding in Kotlin for Conductor.
 
-## Usage
-
-Currently, CheeseWire offers an implementation for Conductor. To use add
-
-    implementation 'de.hannesstruss.cheesewire:cheesewire-conductor:[latest version]'
-
-to your `build.gradle`.
-
-Add a `ConductorViewBinder` to your base controller:
+To use, add a `ConductorViewBinder` to your base controller:
 
 ```kotlin
-class BaseController : Controller() {
+abstract class BaseController : Controller() {
   protected val views = ConductorViewBinder(this)
 }
 ```
 
-This can now be used to bind views in your child controllers:
+This can now be used to bind views in your concrete controllers:
 
 ```kotlin
 class HomeController : BaseController() {
@@ -56,9 +48,18 @@ class MyMviController : BaseController() {
 ```
 
 
+## Download
+
+```groovy
+dependencies {
+  implementation 'de.hannesstruss.cheesewire:cheesewire-conductor:0.2'
+}
+```
+
+
 ## Attributions :bow:
 
-CheeseWire is based on the awesome work of [ButterKnife](http://jakewharton.github.io/butterknife/),
+CheeseWire is inspired by the awesome work of [ButterKnife](http://jakewharton.github.io/butterknife/),
 [KotterKnife](https://github.com/JakeWharton/kotterknife) and
 [ButterknifeConductor](https://gist.github.com/EricKuck/05887d898c85ae4c47bf88b2cd127e71).
 
