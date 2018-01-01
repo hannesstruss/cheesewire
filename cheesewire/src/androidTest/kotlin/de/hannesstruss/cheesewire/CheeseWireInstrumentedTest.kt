@@ -69,9 +69,10 @@ class CheeseWireInstrumentedTest {
 
   @Test fun findsList() {
     main {
-      assertThat(allExistingChildren).hasSize(2)
-      assertThat(allExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
-      assertThat(allExistingChildren[1].id).isEqualTo(CheeseWireTestActivity.child2Id)
+      assertThat(allExistingChildren.map { it.id }).isEqualTo(listOf(
+          CheeseWireTestActivity.child1Id,
+          CheeseWireTestActivity.child2Id
+      ))
     }
   }
 
@@ -84,8 +85,7 @@ class CheeseWireInstrumentedTest {
 
   @Test fun findsOptionalList() {
     main {
-      assertThat(someExistingChildren).hasSize(1)
-      assertThat(someExistingChildren[0].id).isEqualTo(CheeseWireTestActivity.child1Id)
+      assertThat(someExistingChildren.map { it.id }).isEqualTo(listOf(CheeseWireTestActivity.child1Id))
     }
   }
 
