@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/hannesstruss/cheesewire.svg?branch=master)](https://travis-ci.org/hannesstruss/cheesewire)
-[![Maven Central](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/de/hannesstruss/cheesewire/cheesewire/maven-metadata.xml.svg)](http://search.maven.org/#search%7Cga%7C1%7Ccheesewire)
-
 # CheeseWire
 
 <img src="art/logo.jpg" width="200">
 
 Lifecycle-friendly view binding in Kotlin for Conductor.
+
+[![Build Status](https://travis-ci.org/hannesstruss/cheesewire.svg?branch=master)](https://travis-ci.org/hannesstruss/cheesewire)
+[![Maven Central](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/de/hannesstruss/cheesewire/cheesewire/maven-metadata.xml.svg)](http://search.maven.org/#search%7Cga%7C1%7Ccheesewire)
 
 To use, add a `ConductorViewBinder` to your base controller:
 
