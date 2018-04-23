@@ -29,7 +29,7 @@ before_script:
   - adb shell input keyevent 82
 
 script:
-  - ./gradlew ":sample:assembleDebug" ":cheesewire:connectedCheck" --stacktrace
+  - ./gradlew ":sample:assembleDebug" ":cheesewire:connectedCheck" ":cheesewire-conductor:connectedCheck" --stacktrace
 
 branches:
   except:
