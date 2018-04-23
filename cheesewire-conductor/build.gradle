@@ -35,7 +35,9 @@ dependencies {
   implementation deps.conductor
 
   testImplementation deps.junit
+  androidTestImplementation deps.truth
   androidTestImplementation deps.supportTestRunner
+  androidTestImplementation deps.supportTestRules
 }
 
 task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
