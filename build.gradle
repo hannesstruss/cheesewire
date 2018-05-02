@@ -8,7 +8,7 @@ buildscript {
   dependencies {
     // The Android Gradle Plugin doesn't support being included in submodules.
     // See https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration.html#known_issues
-    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath 'com.android.tools.build:gradle:3.1.2'
   }
 }
 
