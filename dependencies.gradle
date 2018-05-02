@@ -4,9 +4,9 @@ ext {
   targetSdkVersion = 26
 
   // Kotlin
-  def kotlinVersion = '1.2.10'
+  def kotlinVersion = '1.2.41'
   kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-  kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+  kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
   dokka = "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15"
 
   // Conductor
