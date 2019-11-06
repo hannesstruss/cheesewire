@@ -1,3 +1,7 @@
+# :warning: Deprecated
+
+CheeseWire is deprecated. From Android Gradle Plugin 3.6 on, you should use [ViewBinding](https://developer.android.com/topic/libraries/view-binding).
+
 # CheeseWire
 
 <img src="art/logo.jpg" width="200">
